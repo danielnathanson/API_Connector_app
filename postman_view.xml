@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="api_connector_view_form" model="ir.ui.view">
+        <field name="name">api.connector.view.form</field>
+        <field name="model">api.connector</field>
+        <field name="arch" type="xml">
+            <form string="Request View">
+                <sheet>
+                    <group>
+                        <group>
+                            <separator string="Request Information"/>
+                            <field name="name"/>
+                            <field name="request_method"/>
+                            <field name="request_type"/>
+                            <field name="url"/>
+                            <field name="authorization"/>
+
+                            <field name="api_trigger_id"/>
+                        </group>
+                        <group attrs="{'invisible':[('authorization','=', 'No Auth')]}">
+                            <separator string="Authorization Details"/>
+                            <field name="basic_auth_user_name"
+                                   attrs="{'invisible':[('authorization','!=', 'Basic Auth')]}"/>
+                            <field name="basic_auth_password"
+                                   attrs="{'invisible':[('authorization','!=', 'Basic Auth')]}"/>
+                            <field name="oauth_authorization_url"
+                                   attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>
+                            <field name="oauth_client_id" attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>
+                            <field name="oauth_client_secret"
+                                   attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>
+                            <!--                        <field name="oauth_redirect_uri" attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>-->
+                            <field name="oauth_access_token_url"
+                                   attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>
+                            <field name="bearer_token"
+                                   attrs="{'invisible':[('authorization','!=', 'Bearer'),('authorization','!=', 'O Auth 2')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <button string="Send Request" name="send_request" type="object" class="button-class"/>
+                        </group>
+                        <group>
+                            <button string="Generate Token" name="open_oauth_user_authentication_url" type="object"
+                                    class="button-class" style="width: 500px !important;"
+                                    attrs="{'invisible':[('authorization','!=', 'O Auth 2')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Request Headers" name="header_lines"
+                              attrs="{'invisible':[('request_method','!=', 'REST')]}">
+                            <field name="header_line"
+                                   widget="section_and_note_one2many"
+                                   mode="tree,kanban">
+                                <tree
+                                        string="Request Header Lines"
+                                        editable="bottom" class="custom-class-tree-view">
+                                    <control>
+                                        <create name="add_header_control" string="Add a Header"/>
+                                    </control>
+                                    <field name="key"/>
+                                    <field name="take_from_event_record"/>
+                                    <field name='trigger_model_id' invisible="1"/>
+                                    <field name="static_value"
+                                           attrs="{'invisible':[('take_from_event_record','=', True)]}"/>
+                                    <field name="dynamic_value" domain="[('model_id', '=', trigger_model_id)]"
+                                           attrs="{'invisible':[('take_from_event_record','=', False)]}"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Request Parameters" name="parameter_lines"
+                              attrs="{'invisible':[('request_method','!=', 'REST')]}">
+                            <field name="parameter_line"
+                                   widget="section_and_note_one2many"
+                                   mode="tree,kanban">
+                                <tree
+                                        string="Request Parameter Lines"
+                                        editable="bottom"
+                                        class="custom-class-tree-view">
+                                    <control>
+                                        <create name="add_parameter_control" string="Add a Parameter"/>
+                                    </control>
+                                    <field name="key"/>
+                                    <field name="take_from_event_record"/>
+                                    <field name='trigger_model_id' invisible="1"/>
+                                    <field name="static_value"
+                                           attrs="{'invisible':[('take_from_event_record','=', True)]}"/>
+                                    <field name="dynamic_value" domain="[('model_id', '=', trigger_model_id)]"
+                                           attrs="{'invisible':[('take_from_event_record','=', False)]}"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Add to URL" name="add_to_url_lines"
+                              attrs="{'invisible':[('request_method','!=', 'REST')]}">
+                            <field name="add_to_url_line"
+                                   widget="section_and_note_one2many"
+                                   mode="tree,kanban">
+                                <tree
+                                        string="Add to URL Lines"
+                                        editable="bottom"
+                                        class="custom-class-tree-view-alt">
+                                    <control>
+                                        <create name="add_url_parameter_control" string="Add a URL Parameter"/>
+                                    </control>
+                                        <field name="take_from_event_record"/>
+                                        <field name='trigger_model_id' invisible="1"/>
+                                        <field name="static_value"
+                                               attrs="{'invisible':[('take_from_event_record','=', True)]}"/>
+                                        <field name="dynamic_value" domain="[('model_id', '=', trigger_model_id)]"
+                                               attrs="{'invisible':[('take_from_event_record','=', False)]}"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Request Body" name="request_body">
+                            <form>
+                                <group>
+                                    <field name="request_body"/>
+                                </group>
+                            </form>
+                        </page>
+                    </notebook>
+                    <group>
+                    </group>
+                    <group>
+                        <separator string="Response Fetched"/>
+                        <field name="response"/>
+                    </group>
+                    <group>
+                        <separator string=""/>
+                        <separator string="Response Handling"/>
+                        <group>
+                            <field name="state"/>
+                            <field name="target_model_id"/>
+                            <!--                            <button string="Trigger Response Action" name="trigger_response" type="object"-->
+                            <!--                                    class="oe_highlight"/>-->
+                        </group>
+
+                        <notebook>
+                            <page string="Python Code" name='code'
+                                  attrs="{'invisible': [('state', '!=', 'code')]}">
+                                <field name="code" widget="ace" options="{'mode': 'python'}"
+                                       placeholder="Enter Python code here. Help about Python expression is available in the help tab of this document."/>
+                            </page>
+                            <page string="Data to Write" name="page_object"
+                                  attrs="{'invisible': [('state', '=', 'code')]}">
+                                <field name="fields_lines">
+                                    <tree string="Field Mappings" editable="bottom" class="custom-class-tree-view">
+                                        <field name="key" domain="[('model_id', '=', parent.target_model_id)]"/>
+                                        <field name="take_from"/>
+                                        <field name="static_value"
+                                               attrs="{'invisible':[('take_from','=', True)]}"/>
+                                        <field name="dynamic_value"
+                                               attrs="{'invisible':[('take_from','=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="api_connector_view_list" model="ir.ui.view">
+        <field name="name">api.connector.view.list</field>
+        <field name="model">api.connector</field>
+        <field name="arch" type="xml">
+            <tree string="API List">
+                <field name="name"/>
+                <field name="request_method"/>
+                <field name="request_type"/>
+                <field name="url"/>
+                <field name="authorization"/>
+            </tree>
+
+        </field>
+    </record>
+    <record id="trigger_view_list" model="ir.ui.view">
+        <field name="name">trigger.view.list</field>
+        <field name="model">base.automation.api.trigger</field>
+        <field name="arch" type="xml">
+            <tree string="Trigger List">
+                <field name="name"/>
+                <field name="trigger"/>
+            </tree>
+        </field>
+    </record>
+    <record id="api_trigger_form_view" model="ir.ui.view">
+        <field name="name">api.trigger.form.view</field>
+        <field name="model">base.automation.api.trigger</field>
+        <field name="mode">primary</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="base_automation.view_base_automation_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='page_object']" position="replace">
+                <page name="page_object" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

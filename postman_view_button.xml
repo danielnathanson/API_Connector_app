@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+       <record id="api_connector_inherited_tree_view" model="ir.ui.view">
+           <field name="name">api.connector.view.tree.inherit</field>
+           <field name="model">api.connector</field>
+           <field name="inherit_id" ref="api_connector.api_connector_view_list"/>
+           <field name="arch" type="xml">
+               <xpath expr="//tree" position="attributes">
+                   <attribute name="js_class">button_in_tree</attribute>
+               </xpath>
+           </field>
+       </record>
+   </data>
+</odoo>

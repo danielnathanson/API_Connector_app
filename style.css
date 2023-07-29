@@ -1,0 +1,8 @@
+.custom-class-tree-view table thead > tr > th:nth-child(1) {width: 350px !important;}
+.custom-class-tree-view table thead > tr > th:nth-child(2) {width: 200px !important;}
+.custom-class-tree-view-alt table thead > tr > th:nth-child(1) {width: 250px !important;}
+.button-class {background-color: #20B2AA; color: white; width: 600px !important;}
+.button-class:hover {
+  background-color: #3CB371;
+  color: white;
+}

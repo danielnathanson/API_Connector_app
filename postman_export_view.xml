@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="export_postman_connector_view_form" model="ir.ui.view">
+        <field name="name">export.postman.collection.view.form</field>
+        <field name="model">export.postman.collection</field>
+        <field name="arch" type="xml">
+            <form string="Export View">
+                <button name="download_postman_collection" string="Download" type="object"/>
+                <field name = "postman_collection" invisible="1"/>
+                <footer/>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="registry_list_action">
+            <field name="name">Connectors</field>
+            <field name="res_model">api.connector</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the first API connector
+                </p>
+            </field>
+        </record>
+
+<!--        <record model="ir.actions.act_window" id="open_trigger_list">-->
+<!--            <field name="name">Triggers</field>-->
+<!--            <field name="res_model">base.automation.api.trigger</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            &lt;!&ndash; <field name="context">{'default_state': 'api_call'}</field> &ndash;&gt;-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create the first API Trigger-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <menuitem name="API connector"
+                  id="menu_api_connector"
+                  sequence="1"
+                  web_icon="api_connector,static/description/icon.png">
+
+            <menuitem id="menu_api_connector_sub" name="API Requests" sequence="2" action="registry_list_action"/>
+<!--            <menuitem id="menu_api_trigger" name="API Triggers" sequence="3" action="open_trigger_list"/>-->
+        </menuitem>
+
+    </data>
+</odoo>

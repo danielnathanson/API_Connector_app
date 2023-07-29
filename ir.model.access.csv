@@ -1,0 +1,19 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+registry_admin_rule_0,api connector admin,model_api_connector,group_connector_admin,1,1,1,1
+registry_user_rule_0,api connector user,model_api_connector,group_connector_user,1,0,1,0
+registry_admin_rule_1,api connector admin,model_import_postman_collection,group_connector_admin,1,1,1,1
+registry_user_rule_1,api connector user,model_import_postman_collection,group_connector_user,1,0,1,0
+registry_admin_rule_2,api connector admin,model_export_postman_collection,group_connector_admin,1,1,1,1
+registry_user_rule_2,api connector user,model_export_postman_collection,group_connector_user,1,0,1,0
+registry_admin_rule_3,api connector admin,model_api_connector,group_connector_admin,1,1,1,1
+registry_user_rule_3,api connector user,model_api_connector,group_connector_user,1,0,1,0
+registry_admin_rule_4,api connector admin,model_api_header,group_connector_admin,1,1,1,1
+registry_user_rule_4,api connector user,model_api_header,group_connector_user,1,0,1,0
+registry_admin_rule_5,api connector admin,model_api_parameter,group_connector_admin,1,1,1,1
+registry_user_rule_5,api connector user,model_api_parameter,group_connector_user,1,0,1,0
+registry_admin_rule_6,api connector admin,model_add_to_url,group_connector_admin,1,1,1,1
+registry_user_rule_6,api connector user,model_add_to_url,group_connector_user,1,0,1,0
+registry_admin_rule_7,api connector admin,model_response_key_value,group_connector_admin,1,1,1,1
+registry_user_rule_7,api connector user,model_response_key_value,group_connector_user,1,0,1,0
+registry_admin_rule_8,api connector admin,model_base_automation_api_trigger,group_connector_admin,1,1,1,1
+registry_user_rule_8,api connector user,model_base_automation_api_trigger,group_connector_user,1,0,1,0
